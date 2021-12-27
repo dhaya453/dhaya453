@@ -28,17 +28,17 @@ public class ConsumingRestController {
     }
 
     @GetMapping("/consume/greeting")
-   /*@CircuitBreaker(name= "getInvoiceCB", fallbackMethod = "getGreetingFallback")*/
-    public Greeting consumeGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return restTemplate.getForObject("http://localhost:9090/greeting/", Greeting.class);
+    @CircuitBreaker(name= "orderService", fallbackMethod = "getGreetingFallback")
+    public ResponseEntity<Greeting> consumeGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return ResponseEntity.status(HttpStatus.OK).body(restTemplate.getForObject("http://localhost:9090/greeting/", Greeting.class));
     }
 
-    /*public ResponseEntity<String> getGreetingFallback(Exception e)
+    public ResponseEntity<String> getGreetingFallback(Exception e)
     {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greeting Rest service is down");
-    }*/
-
-    public String getGreetingFallback(Exception e) {
-        return "SERVICE IS DOWN, PLEASE TRY AFTER SOMETIME !!!";
     }
+
+    /*public String getGreetingFallback(Exception e) {
+        return "SERVICE IS DOWN, PLEASE TRY AFTER SOMETIME !!!";
+    }*/
 }
