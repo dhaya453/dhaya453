@@ -21,19 +21,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'io.github.resilience4j:resilience4j-spring-boot2'
-	/*implementation 'io.github.resilience4j:resilience4j-all'
-	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
-	implementation 'io.github.resilience4j:resilience4j-micrometer'*/
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
-}
 
 test {
 	useJUnitPlatform()
