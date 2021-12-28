@@ -28,7 +28,7 @@ public class ConsumingRestController {
     }
 
     @GetMapping("/consume/greeting")
-    @CircuitBreaker(name= "orderService", fallbackMethod = "getGreetingFallback")
+    @CircuitBreaker(name= "greetingService", fallbackMethod = "getGreetingFallback")
     public ResponseEntity<Greeting> consumeGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
         return ResponseEntity.status(HttpStatus.OK).body(restTemplate.getForObject("http://localhost:9090/greeting/", Greeting.class));
     }
